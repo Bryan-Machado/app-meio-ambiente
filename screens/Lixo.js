@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native"
-import
+import { Image } from 'expo-image';
 
 const Lixo = () => {
     return (
