@@ -8,19 +8,22 @@ const Lixo = () => {
                 <View style={styles.column}>
                     <Image 
                         source={require('../assets/images/remedios.jpeg')}
-                        resizeMode="cover"
+                        resizeMode="center"
                         style={styles.image}
                     />
                 </View>
                 <View style={styles.column2}>
-                    <Text>
+                    <Text style={styles.title}>Titulo do Lixo</Text>
+                    <Text style={styles.paragraph}>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus in risus ac auctor. Aliquam aliquam eleifend tortor non iaculis. Praesent magna purus, porta quis ultrices vel, hendrerit et ipsum. In placerat convallis risus, vitae egestas libero pretium eu. Integer sed faucibus ipsum. Donec tristique ipsum nunc, ac ultrices urna semper at. Fusce eget euismod magna. Integer eleifend dolor justo, sit amet molestie sem tristique nec. Vivamus vitae euismod velit. Cras auctor elit quis ornare ullamcorper.
                     </Text>
                 </View>
             </View>
 
             <View>
-                <Text>paragrafo gigante</Text>
+                <Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus in risus ac auctor. Aliquam aliquam eleifend tortor non iaculis. Praesent magna purus, porta quis ultrices vel, hendrerit et ipsum. In placerat convallis risus, vitae egestas libero pretium eu. Integer sed faucibus ipsum. Donec tristique ipsum nunc, ac ultrices urna semper at. Fusce eget euismod magna. Integer eleifend dolor justo, sit amet molestie sem tristique nec. Vivamus vitae euismod velit. Cras auctor elit quis ornare ullamcorper.
+                </Text>
                 <View>
                     <Text>Titulo: onde descarta</Text>
                     <View>
@@ -46,7 +49,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
-        backgroundColor: '#d8f'
+        backgroundColor: '#d8f',
+        padding: 20
     },
     column: {
         flex: 1,
@@ -57,13 +61,23 @@ const styles = StyleSheet.create({
     },
     column2: {
         flex: 2,
-        backgroundColor: '#999',
+        backgroundColor: '#555',
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 10
     },
     image: {
-        flex: 1
+        flex: 1,
+        overflow: 'hidden'
+    },
+    title: {
+        fontSize: 24,
+        marginBottom: 15,
+        fontWeight: 'bold',
+        color: '#000'
+    },
+    paragraph: {
+        color: '#000'
     }
 })
 
