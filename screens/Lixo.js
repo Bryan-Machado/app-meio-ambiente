@@ -7,12 +7,12 @@ const Lixo = () => {
             <View style={styles.imageView}>
                 <Image
                     source={require('../assets/images/remedios.jpeg')}
-                    resizeMode="stretch"
+                    resizeMode="cover"
                     style={styles.image}
                 />
                 <Text style={styles.title}>Pílulas</Text>
             </View>
-            <View>
+            <View style={{width: '100%'}}>
                 <Text style={styles.paragraph}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus in risus ac auctor. Aliquam aliquam eleifend tortor non iaculis. Praesent magna purus, porta quis ultrices vel, hendrerit et ipsum. In placerat convallis risus, vitae egestas libero pretium eu. Integer sed faucibus ipsum. Donec tristique ipsum nunc, ac ultrices urna semper at. Fusce eget euismod magna. Integer eleifend dolor justo, sit amet molestie sem tristique nec. Vivamus vitae euismod velit. Cras auctor elit quis ornare ullamcorper.
                 </Text>
@@ -35,7 +35,6 @@ const Lixo = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center'
     },
     column: {
@@ -45,22 +44,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         maxHeight: 350
     },
-    column2: {
-        flex: 2,
-        backgroundColor: '#555',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 10
-    },
     imageView: {
         backgroundColor: '#f0a',
         width: '100%',
+        maxHeight: 200,
         marginBottom: 100
     },
     image: {
         flex: 1,
-        maxHeight: 200,
-        width: '100%'
     },
     title: {
         fontSize: 24,
@@ -102,7 +93,7 @@ const styles = StyleSheet.create({
     trashIcon: {
         width: 60,
         height: 60,
-        borderRadius: '50%'
+        borderRadius: 30
     }
 })
 
