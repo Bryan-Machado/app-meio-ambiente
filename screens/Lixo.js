@@ -7,7 +7,7 @@ const Lixo = () => {
             <View style={styles.imageView}>
                 <Image
                     source={require('../assets/images/remedios.jpeg')}
-                    resizeMode="cover"
+                    resizeMode="contain"
                     style={styles.image}
                 />
                 <Text style={styles.title}>Pílulas</Text>
@@ -45,13 +45,14 @@ const styles = StyleSheet.create({
         maxHeight: 350
     },
     imageView: {
-        backgroundColor: '#f0a',
         width: '100%',
         maxHeight: 200,
         marginBottom: 100
     },
     image: {
-        flex: 1,
+        width: '100%',
+        resizeMode: 'stretch',
+        maxHeight: 200
     },
     title: {
         fontSize: 24,
