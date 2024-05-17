@@ -4,7 +4,7 @@ const TrashTitle = ({children, url1}) => {
     return (
         <View style={styles.imageView}>
                 <Image
-                    source={require(url1)}
+                    source={{uri: url1}}
                     resizeMode="contain"
                     style={styles.image}
                 />

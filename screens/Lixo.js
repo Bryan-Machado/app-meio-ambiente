@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView } from "react-native"
-import DiscardCard from "../components/discardCard"
+import DiscardCard from "../components/DiscardCard"
 import TrashDescription from "../components/TrashDescription"
 import TrashTitle from "../components/TrashTitle"
 // import { Image as ImageExpo } from 'expo-image'; para quando usarmos fotos não locais

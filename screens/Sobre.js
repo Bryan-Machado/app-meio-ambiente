@@ -16,7 +16,7 @@ const About = () => {
 
         <View style={styles.devs}>
           <View style={styles.singularDev}>
-            <Image source={require()}/>
+            <Image source={require('../assets/images/bg-mobile.jpg')}/>
             <Text>Bryan Machado</Text>
           </View>
 

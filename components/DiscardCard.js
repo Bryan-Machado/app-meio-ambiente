@@ -5,9 +5,9 @@ const DiscardCard = ({ children, ecopontos }) => {
         <View style={styles.discardCard}>
             <Text style={styles.discardTitle}>{children}</Text>
             <View style={styles.row}>
-                {ecopontos.slice(0, 2).map((ecoponto, index) => (
+                {ecopontos.slice(0, 2).map((ecoponto) => (
                     ecoponto.image && (
-                        <Image source={ecoponto.image} style={styles.trashIcon} />
+                        <Image source={{uri: ecoponto.image}} style={styles.trashIcon} />
                     )
                 ))}
             </View>
