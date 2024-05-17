@@ -1,22 +1,27 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-const DiscardCard = ({ children, ecopontos }) => {
+const EcopontoCard = ({ children, trashAccepted }) => {
     return (
-        <View style={styles.discardCard}>
+        <View style={styles.ecopontoCard}>
             <Text style={styles.discardTitle}>{children}</Text>
             <View style={styles.row}>
-                {ecopontos.slice(0, 2).map((ecoponto, index) => (
-                    ecoponto.image && (
-                        <Image source={ecoponto.image} style={styles.trashIcon} />
-                    )
-                ))}
+            {trashAccepted.slice(0, 2).map((trash, index) => (
+                <View key={index} style={styles.trashContainer}>
+                    {trash.url ? (
+                        <Image source={{ uri: trash.url }} style={styles.trashIcon} />
+                    ) : (<Text>Esse lixo não possui imagem</Text>)}
+                    {trash.paragraph ? (
+                        <Text style={styles.paragraph}>{trash.paragraph}</Text>
+                    ) : (<Text>Esse lixo não possui título</Text>)}
+                </View>
+            ))}
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    discardCard: {
+    ecopontoCard: {
         width: '100%',
         paddingBottom: 20
     },
@@ -40,4 +45,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DiscardCard
+export default EcopontoCard

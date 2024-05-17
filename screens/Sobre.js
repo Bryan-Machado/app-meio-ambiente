@@ -1,14 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
 
 const About = () => {
   return (
-    <>
-        <View style={styles.container}>
-        <Text>Olá Mundo!!!!</Text>
-        <StatusBar style="auto" />
-        </View>
-    </>
+    <ScrollView contentContainerStyle={styles.container}>
+      
+    </ScrollView>
   )
 }
 

@@ -4,7 +4,7 @@ import TrashDescription from "../components/TrashDescription"
 import TrashTitle from "../components/TrashTitle"
 // import { Image as ImageExpo } from 'expo-image'; para quando usarmos fotos não locais
 
-const Lixo = ({trashName, trashTitleImage, trashDescriptionParagraph,  discardCard}) => {
+const Lixo = ({trashName, trashTitleImage, trashDescriptionParagraph, discardCardEcopontos}) => {
     return (
         <ScrollView contentContainerStyle={styles.container}>
             
@@ -12,9 +12,7 @@ const Lixo = ({trashName, trashTitleImage, trashDescriptionParagraph,  discardCa
             
             <TrashDescription>{trashDescriptionParagraph}</TrashDescription>
 
-            <DiscardCard url1={discardCard.url1} 
-                         url2={discardCard.url2} 
-                         url3={discardCard.url3}>{discardCard.title}</DiscardCard>
+            <DiscardCard ecopontos={discardCardEcopontos}>Esse tipo de lixo possui os seguintes ecopontos como seus principais coletores:</DiscardCard>
 
         </ScrollView>
     )
