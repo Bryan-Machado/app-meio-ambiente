@@ -6,6 +6,7 @@ import Maps from './screens/Maps';
 import Info from './screens/Infos';
 import About from './screens/Sobre';
 import Lixo from './screens/Lixo';
+import Home from './screens/Home';
 
 const Tab = createBottomTabNavigator();
 // const Stack = createNativeStackNavigator()
@@ -27,6 +28,7 @@ export default function App() {
       {/* <UserNavigator /> */}
 
       <Tab.Navigator>
+        <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Maps" component={Maps} />
         <Tab.Screen name="info" component={Info} />
         <Tab.Screen name="About" component={About} />
