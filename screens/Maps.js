@@ -1,14 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Maps = () => {
   const navigation = useNavigation()
 
   const users = useUserStore((state) => state.users)
   const setUsers = useUserStore((state) => state.setUsers)
-  const logout = useUserLoggedStore(state => state.logout)
-
-  console.log('Plataforma Atual: ', Platform.OS)
 
   const getUsers = async () => {
     try {
@@ -25,17 +22,6 @@ const Maps = () => {
   useEffect(() => {
     getUsers()
   }, [])
-
-  const handleLogout = async () => {
-    try {
-      await AsyncStorage.removeItem('userLogged')
-      logout()
-      navigation.navigate('Login')
-    } catch (error) {
-      console.log(error)
-      alert('Erro ao fazer logout!')
-    }
-  }
 
   return (
     <View>
