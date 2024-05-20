@@ -1,5 +1,4 @@
 import {Text, View, StyleSheet, Pressable, Image} from 'react-native'
-import H4 from './ui/H4'
 import { useNavigation } from '@react-navigation/native'
 
 const MarkerCard = ({marker}) => {
@@ -16,8 +15,9 @@ const MarkerCard = ({marker}) => {
                 />
             </View>
             <View>
-                <H4>{marker.name}</H4>
-                <Text style={styles.email}>{marker.email}</Text>
+                <Text style={styles.markerText}>{marker.longitude}</Text>
+                <Text style={styles.markerText}>{marker.latitude}</Text>
+                <Text style={styles.markerText}>{marker.ecoponto.nome}</Text>
             </View>
         </View>
     </Pressable>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         height: 70,
         borderRadius: 35
     },
-    email: {
+    markerText: {
         marginTop: 4
     }
 })
