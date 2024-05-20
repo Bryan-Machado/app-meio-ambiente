@@ -6,7 +6,7 @@ const MarkerCard = ({marker}) => {
   const navigation = useNavigation()
 
   return (
-    <Pressable onPress={() => navigation.navigate('Editar', {marker})}>
+    <Pressable onPress={() => navigation.navigate('info', {ecoponto: marker.ecoponto})}>
         <View style={styles.card}>
             <View style={styles.markerImage}>
                 <Image
