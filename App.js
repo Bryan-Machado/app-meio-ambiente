@@ -28,7 +28,6 @@ export default function App() {
       {/* <UserNavigator /> */}
 
       <Tab.Navigator>
-        <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Maps" component={Maps} />
         <Tab.Screen name="info" component={Info} />
         <Tab.Screen name="About" component={About} />
