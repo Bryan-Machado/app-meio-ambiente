@@ -40,13 +40,13 @@ const Maps = () => {
               <FlatList
                 style={{ width: '100%' }}
                 data={users}
-                renderItem={({ item }) => <CardUser user={item} />}
+                renderItem={({ item }) => <MarkerCard marker={item} />}
                 keyExtractor={item => item.id}
                 ListHeaderComponent={Header}
                 ListFooterComponent={Footer}
                 contentContainerStyle={styles.flatListMarker}
               /> :
-              <Text style={{ color: '#FFF' }}>Loading...</Text>}
+              <Text style={{ color: '#FFF' }}>Carregando...</Text>}
           </View>
         </View>
       </ImageBackground>
