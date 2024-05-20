@@ -12,7 +12,7 @@ const MarkerCard = ({marker}) => {
             <View style={styles.markerImage}>
                 <Image
                     style={styles.markerIcon}
-                    source={{uri: marker.markerImage}}
+                    source={require('../assets/images/marker-icon.png')}
                 />
             </View>
             <View>
