@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import { useNavigation } from '@react-navigation/native';
 
 const categoriesList = [
   { id: 1, name: 'Categoria 1' },
@@ -8,7 +9,9 @@ const categoriesList = [
   { id: 3, name: 'Categoria 3' },
 ];
 
-const MarkerForm = () => {
+const CriarMarker = () => {
+  const navigation = useNavigation()
+
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [ecopontoId, setEcopontoId] = useState('');
@@ -24,14 +27,34 @@ const MarkerForm = () => {
     });
   };
 
-  const handleSubmit = () => {
-    const data = {
-      latitude: parseFloat(latitude),
-      longitude: parseFloat(longitude),
-      ecoponto_id: parseInt(ecopontoId, 10), // Base 10 significa decimal
-      categories: selectedCategories.map((id) => ({ id })),
-    };
-    console.log(data);
+  const postMarker = async () => {
+    try {
+      const data = {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        ecoponto_id: parseInt(ecopontoId, 10), // Base 10 significa decimal
+        categories: selectedCategories.map((id) => ({ id })),
+      };
+      const result = await fetch('http://localhost:3333/user', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      const response = await result.json()
+      console.log(response)
+
+      if (data?.success) {
+        navigation.goBack()
+      } else {
+        alert(data.error)
+      }
+      
+    } catch (error) {
+      console.log('Error postUser ' + error.message)
+      alert(error.message)
+    }
   };
 
   return (
@@ -75,7 +98,7 @@ const MarkerForm = () => {
         </View>
       ))}
 
-      <Button title="Cadastrar" onPress={handleSubmit} />
+      <Button title="Cadastrar" onPress={postMarker} />
     </View>
   );
 };
@@ -101,4 +124,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MarkerForm;
+export default CriarMarker;
