@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import useCategoriaStore from '../stores/categoriaStore';
+import Footer from '../components/Footer';
 
 const Maps = () => {
 
@@ -61,7 +62,6 @@ const Maps = () => {
                 data={markers}
                 renderItem={({ item }) => <MarkerCard marker={item} />}
                 keyExtractor={item => item.id}
-                ListHeaderComponent={Header}
                 ListFooterComponent={Footer}
                 contentContainerStyle={styles.flatListMarker}
               /> :
