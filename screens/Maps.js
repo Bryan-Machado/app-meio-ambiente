@@ -1,26 +1,45 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import useCategoriaStore from '../stores/categoriaStore';
 
 const Maps = () => {
-  const navigation = useNavigation()
 
   const users = useUserStore((state) => state.users)
   const setUsers = useUserStore((state) => state.setUsers)
 
-  const getUsers = async () => {
+  const categorias = useCategoriaStore((state) => state.categorias)
+  const setCategorias = useCategoriaStore((state) => state.setCategorias)
+
+  const markers = useCategoriaStore((state) => state.markers)
+  const setMarkers = useCategoriaStore((state) => state.setMarkers)
+
+  const ecopontos = useCategoriaStore((state) => state.ecopontos)
+  const setEcopontos = useCategoriaStore((state) => state.setEcopontos)
+
+  const getMarkers = async () => {
     try {
-      //const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user')
-      const result = await fetch('http://localhost:3333/user')
+      const result = await fetch('http://localhost:3000/marker')
       const data = await result.json()
       console.log(data.success)
-      setUsers(data.users)
+      setMarkers(data.markers)
     } catch (error) {
-      console.log('Error getUsers ' + error.message)
+      console.log('Error getMarkers ' + error.message)
+    }
+  }
+
+  const getCategorias = async () => {
+    try {
+      const result = await fetch('http://localhost:3000/categoria')
+      const data = await result.json()
+      console.log(data.success)
+      setUsers(data.categorias)
+    } catch (error) {
+      console.log('Error getCategorias ' + error.message)
     }
   }
 
   useEffect(() => {
-    getUsers()
+    getMarkers(),
+    getCategorias()
   }, [])
 
   return (
@@ -36,10 +55,10 @@ const Maps = () => {
           </View>
 
           <View style={styles.listUser}>
-            {users.length ?
+            {markers.length ?
               <FlatList
                 style={{ width: '100%' }}
-                data={users}
+                data={markers}
                 renderItem={({ item }) => <MarkerCard marker={item} />}
                 keyExtractor={item => item.id}
                 ListHeaderComponent={Header}
