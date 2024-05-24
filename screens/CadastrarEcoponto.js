@@ -11,6 +11,7 @@ const CadastrarEcoponto = () => {
     const [txtTelefone, setTxtTelefone] = useState('')
     const [txtCnpj, setTxtCnpj] = useState('')
     const [txtDescricao, setTxtDescricao] = useState('')
+    const [imagemUrl, setImagemUrl] = useState('')
 
     const postEcoponto = async () =>{
         try{
@@ -19,7 +20,7 @@ const CadastrarEcoponto = () => {
             headers:{
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({nome: txtName, email: txtEmail, cnpj: txtCnpj, telefone: txtTelefone, descricao: txtDescricao })
+            body: JSON.stringify({nome: txtName, email: txtEmail, cnpj: txtCnpj, telefone: txtTelefone, descricao: txtDescricao, imageurl: imagemUrl })
           })
           const data = await result.json()
           console.log(data)
@@ -66,6 +67,12 @@ const CadastrarEcoponto = () => {
                 placeholder='Descrição...'
                 onChangeText={setTxtDescricao}
                 value={txtDescricao}
+                />
+                <TextInput 
+                style={styles.input}
+                placeholder='Url da imagem...'
+                onChangeText={setImagemUrl}
+                value={imagemUrl}
                 />
                 <Button 
                     title="Cadastrar Ecoponto"

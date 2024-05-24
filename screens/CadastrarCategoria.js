@@ -10,6 +10,7 @@ const CadastrarCategoria = () => {
 
     const [txtName, setTxtName] = useState('')
     const [txtDescricao, setTxtDescricao] = useState('')
+    const [imagemUrl, setImagemUrl] = useState('')
 
     const postCategoria = async () =>{
         try{
@@ -18,7 +19,7 @@ const CadastrarCategoria = () => {
             headers:{
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({nome: txtName, descricao: txtDescricao })
+            body: JSON.stringify({nome: txtName, descricao: txtDescricao, imagemurl: imagemUrl})
           })
           const data = await result.json()
           addCategoria(data.categoria)
@@ -47,6 +48,12 @@ const CadastrarCategoria = () => {
                 placeholder='Descrição...'
                 onChangeText={setTxtDescricao}
                 value={txtDescricao}
+                />
+                <TextInput 
+                style={styles.input}
+                placeholder='Url da imagem...'
+                onChangeText={setImagemUrl}
+                value={imagemUrl}
                 />
                 <Button 
                     title="Cadastrar categoria"
