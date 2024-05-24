@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 const Maps = () => {
 
-  const categorias = useCategoriaStore((state) => state.categorias)
+  // const categorias = useCategoriaStore((state) => state.categorias)
   const setCategorias = useCategoriaStore((state) => state.setCategorias)
 
   const markers = useCategoriaStore((state) => state.markers)
