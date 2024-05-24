@@ -4,6 +4,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import Checkbox from 'expo-checkbox'; // Certifique-se de instalar a biblioteca expo-checkbox
 import Button from '../components/ui/Button';
 import useMarkerStore from '../stores/markerStore';
+import useCategoriaStore from '../stores/categoriaStore';
 
 const EditarMarker = () => {
   const route = useRoute();
@@ -12,7 +13,8 @@ const EditarMarker = () => {
   const removeMarkerStore = useMarkerStore((state) => state.removeMarker);
   const updateMarker = useMarkerStore((state) => state.updateMarker);
 
-  const { marker, categorias } = route.params;
+  const { marker } = route.params;
+  const categorias = useCategoriaStore((state) => state.categorias)
 
   const [latitude, setLatitude] = useState(marker.latitude);
   const [longitude, setLongitude] = useState(marker.longitude);

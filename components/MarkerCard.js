@@ -19,7 +19,7 @@ const MarkerCard = ({marker}) => {
                 <Text style={styles.markerText}>{marker.latitude}</Text>
                 <Text style={styles.markerText}>{marker.ecoponto.nome}</Text>
             </View>
-            <Pressable style={styles.butao} onPress={() => navigation.navigate('info', {ecoponto: marker.ecoponto})}>
+            <Pressable style={styles.butao} onPress={() => navigation.navigate('info', {marker: marker})}>
                 <Text>Editar</Text>
             </Pressable>
         </View>
