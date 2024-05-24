@@ -6,7 +6,7 @@ const MarkerCard = ({marker}) => {
   const navigation = useNavigation()
 
   return (
-    <Pressable onPress={() => navigation.navigate('info', {ecoponto: marker.ecoponto})}>
+    <Pressable onPress={() => navigation.navigate('info', {...marker.ecoponto})}>
         <View style={styles.card}>
             <View style={styles.markerImage}>
                 <Image
@@ -15,11 +15,11 @@ const MarkerCard = ({marker}) => {
                 />
             </View>
             <View>
-                <Text style={styles.markerText}>{marker.longitude}</Text>
-                <Text style={styles.markerText}>{marker.latitude}</Text>
-                <Text style={styles.markerText}>{marker.ecoponto.nome}</Text>
+                <Text style={styles.markerText}>longitude: {marker.longitude}</Text>
+                <Text style={styles.markerText}>latitude: {marker.latitude}</Text>
+                <Text style={styles.markerText}>ecoponto: {marker.ecoponto.nome}</Text>
             </View>
-            <Pressable style={styles.butao} onPress={() => navigation.navigate('info', {marker: marker})}>
+            <Pressable style={styles.butao} onPress={() => navigation.navigate('EditarMarker', {marker: marker})}>
                 <Text>Editar</Text>
             </Pressable>
         </View>

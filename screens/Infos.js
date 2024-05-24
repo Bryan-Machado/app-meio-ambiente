@@ -2,14 +2,21 @@ import { StyleSheet } from 'react-native';
 import TrashDescription from '../components/TrashDescription';
 import TrashTitle from '../components/TrashTitle';
 import EcopontoCard from '../components/EcopontoCard';
+import getCategoriasEcopontoByMarkers from '../helpers/getCategoriasEcopontoByMarkers';
+import useMarkerStore from '../stores/markerStore';
 
-const Info = ({ecopontoImage, ecopontoName, ecopontoDescription, ecopontoTrashAccepted}) => {
+const Info = ({id, nome, descricao, ecopontoImage, ecopontoTrashAccepted}) => {
+
+  const markers = useMarkerStore((state) => state.markers)
+
+  categorias = getCategoriasEcopontoByMarkers(id, markers)
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
 
-      <TrashTitle url1={ecopontoImage}>{ecopontoName}</TrashTitle>
+      <TrashTitle url1={ecopontoImage}>{nome}</TrashTitle>
 
-      <TrashDescription>{ecopontoDescription}</TrashDescription>
+      <TrashDescription>{descricao}</TrashDescription>
 
       <EcopontoCard trashAccepted={ecopontoTrashAccepted}>Tipos de lixo aceito por este ecoponto:</EcopontoCard>
 

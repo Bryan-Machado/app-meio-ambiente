@@ -64,4 +64,26 @@ const example = {
             ]
         }
     ]
+};
+
+// Função para extrair todas as categorias de um ecoponto específico
+function getCategoriasEcoponto(ecopontoId) {
+    const categorias = new Set();
+
+    example.markers.forEach(marker => {
+        if (marker.ecoponto_id === ecopontoId) {
+            marker.marker_has_categoria.forEach(categoria => {
+                categorias.add(JSON.stringify(categoria.categoria));
+            });
+        }
+    });
+
+    console.log(categorias);
+
+    // Convertendo os objetos de categoria de volta para objetos e retornando como array
+    return Array.from(categorias).map(categoria => JSON.parse(categoria));
 }
+
+// Testando a função com o ecoponto_id 2
+const categoriasEcoponto2 = getCategoriasEcoponto(2);
+console.log(categoriasEcoponto2);
