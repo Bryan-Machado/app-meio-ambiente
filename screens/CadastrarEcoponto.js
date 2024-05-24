@@ -1,26 +1,25 @@
 import { useState } from 'react'
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native'
 import Button from '../components/ui/Button'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import H1 from '../components/ui/H1.js'
+import { useNavigation } from '@react-navigation/native'
 
-const Cadastrar = () => {
+const CadastrarEcoponto = () => {
     const navigation = useNavigation()
 
     const [txtName, setTxtName] = useState('')
     const [txtEmail, setTxtEmail] = useState('')
-    const [txtAvatar, setTxtAvatar] = useState('')
-    const [txtPass, setTxtPass] = useState('')
+    const [txtTelefone, setTxtTelefone] = useState('')
+    const [txtCnpj, setTxtCnpj] = useState('')
+    const [txtDescricao, setTxtDescricao] = useState('')
 
-    const postUser = async () =>{
+    const postEcoponto = async () =>{
         try{
-          //const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user', {
-          const result = await fetch('http://localhost:3333/user', {
+          const result = await fetch('http://localhost:3000/ecoponto', {
             method: "POST",
             headers:{
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({name: txtName, email: txtEmail, pass: txtPass, avatar: txtAvatar})
+            body: JSON.stringify({nome: txtName, email: txtEmail, cnpj: txtCnpj, telefone: txtTelefone, descricao: txtDescricao })
           })
           const data = await result.json()
           console.log(data)
@@ -30,7 +29,7 @@ const Cadastrar = () => {
             alert(data.error)
           }
         } catch (error){
-          console.log('Error postUser ' + error.message)
+          console.log('Error postEcoponto ' + error.message)
           alert(error.message)
         }
       } 
@@ -53,18 +52,24 @@ const Cadastrar = () => {
                 <TextInput 
                 style={styles.input}
                 placeholder='Senha...'
-                onChangeText={setTxtPass}
-                value={txtPass}
+                onChangeText={setTxtCnpj}
+                value={txtCnpj}
                 />
                 <TextInput 
                 style={styles.input}
-                placeholder='Avatar...'
-                onChangeText={setTxtAvatar}
-                value={txtAvatar}
+                placeholder='Telefone...'
+                onChangeText={setTxtTelefone}
+                value={txtTelefone}
+                />
+                <TextInput 
+                style={styles.input}
+                placeholder='Descrição...'
+                onChangeText={setTxtDescricao}
+                value={txtDescricao}
                 />
                 <Button 
-                    title="Cadastrar Usuário"
-                    onPress={postUser}
+                    title="Cadastrar Ecoponto"
+                    onPress={postEcoponto}
                 />
             </View>
         </ScrollView>
@@ -86,4 +91,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Cadastrar
+export default CadastrarEcoponto

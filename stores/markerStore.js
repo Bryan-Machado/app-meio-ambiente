@@ -8,7 +8,7 @@ const useMarkerStore = create((set) => ({
     const markersFiltrado = state.markers.filter((marker => marker.id !== id))
     return {markers: markersFiltrado}
   }),
-  updateMarker: (newMarker) => set((state) => ({ Markers: state.markers.map((marker) => (marker.id === newMarker.id ? newMarker : marker))})),
+  updateMarker: (newMarker) => set((state) => ({ markers: state.markers.map((marker) => (marker.id === newMarker.id ? newMarker : marker))})),
 }))
 
 export default useMarkerStore

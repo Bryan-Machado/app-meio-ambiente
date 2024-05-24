@@ -2,13 +2,13 @@ import { create } from 'zustand'
 
 const useEcopontoStore = create((set) => ({
   ecopontos: [],
-  setEcopontos: (newEcopontos) => set(() => ({ Ecopontos: newEcopontos })),
-  addEcoponto: (newEcoponto) => set((state) => ({ Ecopontos: [...state.Ecopontos, newEcoponto] })),
+  setEcopontos: (newEcopontos) => set(() => ({ ecopontos: newEcopontos })),
+  addEcoponto: (newEcoponto) => set((state) => ({ ecopontos: [...state.ecopontos, newEcoponto] })),
   removeEcoponto: (id) => set((state) => {
-    const EcopontosFiltrado = state.Ecopontos.filter((Ecoponto => Ecoponto.id !== id))
-    return {Ecopontos: EcopontosFiltrado}
+    const ecopontosFiltrado = state.ecopontos.filter((ecoponto => ecoponto.id !== id))
+    return {ecopontos: ecopontosFiltrado}
   }),
-  updateEcoponto: (newEcoponto) => set((state) => ({ Ecopontos: state.Ecopontos.map((Ecoponto) => (Ecoponto.id === newEcoponto.id ? newEcoponto : Ecoponto))})),
+  updateEcoponto: (newEcoponto) => set((state) => ({ ecopontos: state.ecopontos.map((ecoponto) => (ecoponto.id === newEcoponto.id ? newEcoponto : ecoponto))})),
 }))
 
 export default useEcopontoStore

@@ -19,6 +19,9 @@ const MarkerCard = ({marker}) => {
                 <Text style={styles.markerText}>{marker.latitude}</Text>
                 <Text style={styles.markerText}>{marker.ecoponto.nome}</Text>
             </View>
+            <Pressable style={styles.butao} onPress={() => navigation.navigate('info', {ecoponto: marker.ecoponto})}>
+                <Text>Editar</Text>
+            </Pressable>
         </View>
     </Pressable>
   )
@@ -45,6 +48,9 @@ const styles = StyleSheet.create({
     },
     markerText: {
         marginTop: 4
+    },
+    butao: {
+        backgroundColor: '#aaa'
     }
 })
 

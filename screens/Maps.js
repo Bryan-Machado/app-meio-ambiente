@@ -4,17 +4,11 @@ import Footer from '../components/Footer';
 
 const Maps = () => {
 
-  const users = useUserStore((state) => state.users)
-  const setUsers = useUserStore((state) => state.setUsers)
-
   const categorias = useCategoriaStore((state) => state.categorias)
   const setCategorias = useCategoriaStore((state) => state.setCategorias)
 
   const markers = useCategoriaStore((state) => state.markers)
   const setMarkers = useCategoriaStore((state) => state.setMarkers)
-
-  const ecopontos = useCategoriaStore((state) => state.ecopontos)
-  const setEcopontos = useCategoriaStore((state) => state.setEcopontos)
 
   const getMarkers = async () => {
     try {
@@ -32,7 +26,7 @@ const Maps = () => {
       const result = await fetch('http://localhost:3000/categoria')
       const data = await result.json()
       console.log(data.success)
-      setUsers(data.categorias)
+      setCategorias(data.categorias)
     } catch (error) {
       console.log('Error getCategorias ' + error.message)
     }

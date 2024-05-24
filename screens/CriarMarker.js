@@ -1,89 +1,123 @@
-import { useState } from 'react'
-import {View, TextInput, StyleSheet, ScrollView} from 'react-native'
-import Button from '../components/ui/Button'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import H1 from '../components/ui/H1.js'
+import { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import Checkbox from 'expo-checkbox';
+import { useNavigation} from '@react-navigation/native';
+import useCategoriaStore from '../stores/categoriaStore';
 
-const Cadastrar = () => {
-    const navigation = useNavigation()
+const CriarMarker = () => {
+  const navigation = useNavigation()
+  const categorias = useCategoriaStore((state) => state.categorias)
 
-    const [txtLongitude, setTxtLongitude] = useState('')
-    const [txtLatitude, setTxtLatitude] = useState('')
-    const [txtAvatar, setTxtAvatar] = useState('')
-    const [txtEcopontoId, setTxtEcopontoId] = useState('')
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [ecopontoId, setEcopontoId] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
-    const postUser = async () =>{
-        try{
-          //const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user', {
-          const result = await fetch('http://localhost:3333/user', {
-            method: "POST",
-            headers:{
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({longitude: txtLongitude, latitude: txtLatitude, ecoponto_id: txtEcopontoId, categorias: txtAvatar})
-          })
-          const data = await result.json()
-          console.log(data)
-          if(data?.success){
-            navigation.goBack()
-          } else {
-            alert(data.error)
-          }
-        } catch (error){
-          console.log('Error postUser ' + error.message)
-          alert(error.message)
-        }
-      } 
+  const handleCheckboxChange = (id) => {
+    setSelectedCategories((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((catId) => catId !== id);
+      } else {
+        return [...prev, id];
+      }
+    });
+  };
 
-    return (
-        <ScrollView>
-            <View style={styles.form}>
-                <TextInput 
-                style={styles.input}
-                placeholder='Nome...'
-                onChangeText={setTxtLongitude}
-                value={txtLongitude}
-                />
-                <TextInput 
-                style={styles.input}
-                placeholder='Latitude...'
-                onChangeText={setTxtLatitude}
-                value={txtLatitude}
-                />
-                <TextInput 
-                style={styles.input}
-                placeholder='Senha...'
-                onChangeText={setTxtEcopontoId}
-                value={txtEcopontoId}
-                />
-                <TextInput 
-                style={styles.input}
-                placeholder='Avatar...'
-                onChangeText={setTxtAvatar}
-                value={txtAvatar}
-                />
-                <Button 
-                    title="Cadastrar Usuário"
-                    onPress={postUser}
-                />
-            </View>
-        </ScrollView>
-    )
-}
+  const postMarker = async () => {
+    try {
+      const data = {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        ecoponto_id: parseInt(ecopontoId, 10), // Base 10 significa decimal
+        categories: selectedCategories.map((id) => ({ id })),
+      };
+      const result = await fetch('http://localhost:3000/marker', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      const response = await result.json()
+      console.log(response)
+
+      if (data?.success) {
+        navigation.goBack()
+      } else {
+        alert(data.error)
+      }
+      
+    } catch (error) {
+      console.log('Error postMarker ' + error.message)
+      alert(error.message)
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text>Latitude:</Text>
+      <TextInput
+        style={styles.input}
+        value={latitude}
+        onChangeText={setLatitude}
+        keyboardType="numeric"
+        placeholder="Latitude"
+      />
+
+      <Text>Longitude:</Text>
+      <TextInput
+        style={styles.input}
+        value={longitude}
+        onChangeText={setLongitude}
+        keyboardType="numeric"
+        placeholder="Longitude"
+      />
+
+      <Text>Ecoponto ID:</Text>
+      <TextInput
+        style={styles.input}
+        value={ecopontoId}
+        onChangeText={setEcopontoId}
+        keyboardType="numeric"
+        placeholder="Ecoponto ID"
+      />
+
+      <Text>Categorias:</Text>
+      {categorias.map((category) => (
+        <View key={category.id} style={styles.checkboxContainer}>
+          <Checkbox
+            value={selectedCategories.includes(category.id)}
+            onValueChange={() => handleCheckboxChange(category.id)}
+            style={styles.checkbox}
+          />
+          <Text>{category.name}</Text>
+        </View>
+      ))}
+
+      <Button title="Cadastrar" onPress={postMarker} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    form: {
-        display: 'flex',
-        padding: 40
-    },
-    input: {
-        height: 40,
-        width: '100%',
-        backgroundColor: '#FFF',
-        borderWidth: 1,
-        marginBottom: 18,
-        padding: 10,
-    }
-})
+  container: {
+    padding: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 8,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  checkbox: {
+    marginRight: 8,
+  },
+});
 
-export default Cadastrar
+export default CriarMarker;
