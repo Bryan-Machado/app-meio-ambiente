@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, Text, View, Image } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Image, ImageBackground } from 'react-native';
 
 const About = () => {
   return (
@@ -16,7 +16,7 @@ const About = () => {
 
         <View style={styles.devs}>
           <View style={styles.singularDev}>
-            <Image source={require('../assets/images/bg-mobile.jpg')}/>
+            <Image source={require('../assets/images/remedios.jpeg')}/>
             <Text>Bryan Machado</Text>
           </View>
 
@@ -39,6 +39,7 @@ const About = () => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      maxHeight: '100%',
       alignItems: 'center',
       justifyContent: 'center',
     },

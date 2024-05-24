@@ -1,19 +1,26 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const EcopontoCard = ({ children, trashAccepted }) => {
+    console.log(trashAccepted)
+
+    const navigation = useNavigation()
+
     return (
         <View style={styles.ecopontoCard}>
             <Text style={styles.discardTitle}>{children}</Text>
             <View style={styles.row}>
             {trashAccepted.slice(0, 2).map((trash, index) => (
-                <View key={index} style={styles.trashContainer}>
-                    {trash.url ? (
-                        <Image source={{ uri: trash.url }} style={styles.trashIcon} />
-                    ) : (<Text>Esse lixo não possui imagem</Text>)}
-                    {trash.paragraph ? (
-                        <Text style={styles.paragraph}>{trash.paragraph}</Text>
-                    ) : (<Text>Esse lixo não possui título</Text>)}
-                </View>
+                <Pressable key={index} onPress={() => navigation.navigate('Lixo', {categoria: trash})}>
+                    <View key={index} style={styles.trashContainer}>
+                        {trash.imagemurl ? (
+                            <Image source={{ uri: trash.imagemurl }} style={styles.trashIcon} />
+                        ) : (<Text>Esse lixo não possui imagem</Text>)}
+                        {trash.nome ? (
+                            <Text style={styles.paragraph}>{trash.nome}</Text>
+                        ) : (<Text>Esse lixo não possui título</Text>)}
+                    </View>
+                </Pressable>
             ))}
             </View>
         </View>

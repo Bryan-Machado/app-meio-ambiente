@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native'
 import Button from '../components/ui/Button'
 import { useNavigation } from '@react-navigation/native'
+import useCategoriaStore from '../stores/categoriaStore'
 
 const CadastrarCategoria = () => {
     const navigation = useNavigation()

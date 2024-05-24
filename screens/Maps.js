@@ -1,20 +1,23 @@
-import { StyleSheet, Text, View } from 'react-native';
-import useCategoriaStore from '../stores/categoriaStore';
+import { StyleSheet, Text, View, ImageBackground, FlatList } from 'react-native';
+import MarkerCard from '../components/MarkerCard'
+import useMarkerStore from '../stores/markerStore';
+import useCategoriaStore from '../stores/categoriaStore'
 import Footer from '../components/Footer';
+import { useEffect } from 'react';
 
 const Maps = () => {
 
-  // const categorias = useCategoriaStore((state) => state.categorias)
+  const categorias = useCategoriaStore((state) => state.categorias)
   const setCategorias = useCategoriaStore((state) => state.setCategorias)
 
-  const markers = useCategoriaStore((state) => state.markers)
-  const setMarkers = useCategoriaStore((state) => state.setMarkers)
+  const markers = useMarkerStore((state) => state.markers)
+  const setMarkers = useMarkerStore((state) => state.setMarkers)
 
   const getMarkers = async () => {
     try {
       const result = await fetch('http://localhost:3000/marker')
+      console.log('primeiro log');
       const data = await result.json()
-      console.log(data.success)
       setMarkers(data.markers)
     } catch (error) {
       console.log('Error getMarkers ' + error.message)
@@ -54,7 +57,7 @@ const Maps = () => {
               <FlatList
                 style={{ width: '100%' }}
                 data={markers}
-                renderItem={({ item }) => <MarkerCard marker={item} />}
+                renderItem={({ item }) => <MarkerCard marker={item} /> }
                 keyExtractor={item => item.id}
                 ListFooterComponent={Footer}
                 contentContainerStyle={styles.flatListMarker}

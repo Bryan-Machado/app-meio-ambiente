@@ -84,6 +84,24 @@ function getCategoriasEcoponto(ecopontoId) {
     return Array.from(categorias).map(categoria => JSON.parse(categoria));
 }
 
+function getEcopontosByCategoria(categoriaId, markers) {
+    const ecopontos = new Set();
+
+    markers.forEach(marker => {
+        marker.marker_has_categoria.forEach(categoria => {
+            if (categoria.categoria_id === categoriaId) {
+                ecopontos.add(JSON.stringify(marker.ecoponto));
+            }
+        });
+    });
+
+    // Convertendo os objetos de ecoponto de volta para objetos e retornando como array
+    return Array.from(ecopontos).map(ecoponto => JSON.parse(ecoponto));
+}
+
 // Testando a função com o ecoponto_id 2
 const categoriasEcoponto2 = getCategoriasEcoponto(2);
 console.log(categoriasEcoponto2);
+
+const ecopontos = getEcopontosByCategoria(1, example.markers)
+console.log(ecopontos);

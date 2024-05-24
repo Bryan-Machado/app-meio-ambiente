@@ -2,17 +2,28 @@ import { StyleSheet, ScrollView } from "react-native"
 import DiscardCard from "../components/DiscardCard"
 import TrashDescription from "../components/TrashDescription"
 import TrashTitle from "../components/TrashTitle"
+import { useRoute } from "@react-navigation/native"
+import getEcopontosByCategoria from "../helpers/getEcopontosByCategoria"
+import useMarkerStore from "../stores/markerStore"
 // import { Image as ImageExpo } from 'expo-image'; para quando usarmos fotos não locais
 
-const Lixo = ({trashName, trashTitleImage, trashDescriptionParagraph, discardCardEcopontos}) => {
+const Lixo = () => {
+
+    const markers = useMarkerStore(state => state.markers)
+
+    const route = useRoute()
+    const {categoria} = route.params
+    const {id, nome, imagemurl, descricao } = categoria
+    const ecopontos = getEcopontosByCategoria(id, markers)
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
             
-            <TrashTitle url1={trashTitleImage}>{trashName}</TrashTitle>
+            <TrashTitle url1={imagemurl}>{nome}</TrashTitle>
             
-            <TrashDescription>{trashDescriptionParagraph}</TrashDescription>
+            <TrashDescription>{descricao}</TrashDescription>
 
-            <DiscardCard ecopontos={discardCardEcopontos}>Esse tipo de lixo possui os seguintes ecopontos como seus principais coletores:</DiscardCard>
+            <DiscardCard ecopontos={ecopontos}>Esse tipo de lixo possui os seguintes ecopontos como seus principais coletores:</DiscardCard>
 
         </ScrollView>
     )

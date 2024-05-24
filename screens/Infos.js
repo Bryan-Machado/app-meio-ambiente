@@ -1,24 +1,30 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import TrashDescription from '../components/TrashDescription';
 import TrashTitle from '../components/TrashTitle';
 import EcopontoCard from '../components/EcopontoCard';
 import getCategoriasEcopontoByMarkers from '../helpers/getCategoriasEcopontoByMarkers';
 import useMarkerStore from '../stores/markerStore';
+import { useRoute } from '@react-navigation/native';
 
-const Info = ({id, nome, descricao, ecopontoImage, ecopontoTrashAccepted}) => {
+const Info = () => {
+
+  const route = useRoute()
+  console.log(route.params);
+  const ecoponto = route.params.ecoponto
+  const {id, nome, descricao, imagemurl} = ecoponto
 
   const markers = useMarkerStore((state) => state.markers)
 
-  categorias = getCategoriasEcopontoByMarkers(id, markers)
+  const categorias = getCategoriasEcopontoByMarkers(id, markers)
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
 
-      <TrashTitle url1={ecopontoImage}>{nome}</TrashTitle>
+      <TrashTitle url1={imagemurl}>{nome}</TrashTitle>
 
       <TrashDescription>{descricao}</TrashDescription>
 
-      <EcopontoCard trashAccepted={ecopontoTrashAccepted}>Tipos de lixo aceito por este ecoponto:</EcopontoCard>
+      <EcopontoCard trashAccepted={categorias}>Tipos de lixo aceito por este ecoponto:</EcopontoCard>
 
     </ScrollView>
   )

@@ -4,9 +4,10 @@ import { useNavigation } from '@react-navigation/native'
 const MarkerCard = ({marker}) => {
 
   const navigation = useNavigation()
+  console.log(marker.ecoponto);
 
   return (
-    <Pressable onPress={() => navigation.navigate('info', {...marker.ecoponto})}>
+    <Pressable onPress={() => navigation.navigate('info', {ecoponto: marker.ecoponto})}>
         <View style={styles.card}>
             <View style={styles.markerImage}>
                 <Image

@@ -1,13 +1,15 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
+import useMarkerStore from '../stores/markerStore';
 
 const DiscardCard = ({ children, ecopontos }) => {
+
     return (
         <View style={styles.discardCard}>
             <Text style={styles.discardTitle}>{children}</Text>
             <View style={styles.row}>
-                {ecopontos.slice(0, 2).map((ecoponto) => (
-                    ecoponto.image && (
-                        <Image source={{uri: ecoponto.image}} style={styles.trashIcon} />
+                {ecopontos.slice(0, 2).map((ecoponto, index) => (
+                    ecoponto.imagemurl && (
+                        <Image key={index} source={{uri: ecoponto.imagemurl}} style={styles.trashIcon} />
                     )
                 ))}
             </View>
