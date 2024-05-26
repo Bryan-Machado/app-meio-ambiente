@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import { View, TextInput, StyleSheet, ScrollView } from 'react-native'
 import Button from '../components/ui/Button'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import useCategoriaStore from '../stores/categoriaStore'
 
-const EditarCategoria = (categoria) => {
+const EditarCategoria = () => {
     const navigation = useNavigation()
+    const route = useRoute()
+
+    const { categoria } = route.params
+
 
     const removeCategoriaStore = useCategoriaStore((state) => state.removeCategoria);
     const updateCategoriaStore = useCategoriaStore((state) => state.updateCategoria);
@@ -17,14 +21,15 @@ const EditarCategoria = (categoria) => {
     const updateCategoria = async () => {
         try {
             const result = await fetch('http://localhost:3000/categoria/' + categoria.id, {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ nome: txtName, descricao: txtDescricao, imageurl: imagemUrl })
+                body: JSON.stringify({ nome: txtName, descricao: txtDescricao, imagemurl: imagemUrl })
             })
             const data = await result.json()
-            updateCategoriaStore(data.categoria)
+            console.log(data);
+            updateCategoriaStore(data.categoriaEditado)
             if (data?.success) {
                 navigation.goBack()
             } else {

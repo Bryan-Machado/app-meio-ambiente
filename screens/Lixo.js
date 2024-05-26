@@ -1,29 +1,35 @@
-import { StyleSheet, ScrollView } from "react-native"
+import { StyleSheet, ScrollView, Pressable, Text } from "react-native"
 import DiscardCard from "../components/DiscardCard"
 import TrashDescription from "../components/TrashDescription"
 import TrashTitle from "../components/TrashTitle"
-import { useRoute } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import getEcopontosByCategoria from "../helpers/getEcopontosByCategoria"
 import useMarkerStore from "../stores/markerStore"
+import Button from "../components/ui/Button"
 // import { Image as ImageExpo } from 'expo-image'; para quando usarmos fotos não locais
 
 const Lixo = () => {
+    const navigation = useNavigation()
 
     const markers = useMarkerStore(state => state.markers)
 
     const route = useRoute()
-    const {categoria} = route.params
-    const {id, nome, imagemurl, descricao } = categoria
+    const { categoria } = route.params
+    const { id, nome, imagemurl, descricao } = categoria
     const ecopontos = getEcopontosByCategoria(id, markers)
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            
+
             <TrashTitle url1={imagemurl}>{nome}</TrashTitle>
-            
+
             <TrashDescription>{descricao}</TrashDescription>
 
             <DiscardCard ecopontos={ecopontos}>Esse tipo de lixo possui os seguintes ecopontos como seus principais coletores:</DiscardCard>
+
+            <Button title="Editar categoria" onPress={() => navigation.navigate('EditarCategoria', {categoria})}/>
+            
+            <Button title="Cadastrar nova categoria" onPress={() => navigation.navigate('CadastrarCategoria')}/>
 
         </ScrollView>
     )

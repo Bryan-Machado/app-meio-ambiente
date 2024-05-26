@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View, ImageBackground, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, FlatList, Pressable } from 'react-native';
 import MarkerCard from '../components/MarkerCard'
 import useMarkerStore from '../stores/markerStore';
 import useCategoriaStore from '../stores/categoriaStore'
 import Footer from '../components/Footer';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback } from 'react';
+import Button from '../components/ui/Button'
 
 const Maps = () => {
 
-  const categorias = useCategoriaStore((state) => state.categorias)
+  const navigation = useNavigation()
+
   const setCategorias = useCategoriaStore((state) => state.setCategorias)
 
   const markers = useMarkerStore((state) => state.markers)
@@ -54,7 +56,7 @@ const Maps = () => {
           </View>
 
           <View style={styles.listUser}>
-            {markers.length ?
+            {markers?.length ?
               <FlatList
                 style={{ width: '100%' }}
                 data={markers}
@@ -65,6 +67,7 @@ const Maps = () => {
               /> :
               <Text style={{ color: '#FFF' }}>Carregando...</Text>}
           </View>
+          <Button title="Cadastrar novo marker" onPress={() => navigation.navigate('CadastrarMarker')} />
         </View>
       </ImageBackground>
     </View>

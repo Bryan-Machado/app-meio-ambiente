@@ -29,8 +29,9 @@ const CriarMarker = () => {
         latitude: parseFloat(latitude),
         longitude: parseFloat(longitude),
         ecoponto_id: parseInt(ecopontoId, 10), // Base 10 significa decimal
-        categories: selectedCategories.map((id) => ({ id })),
+        categorias: selectedCategories.map((id) => ({ id })),
       };
+      console.log(data);
       const result = await fetch('http://localhost:3000/marker', {
         method: "POST",
         headers: {
@@ -41,7 +42,7 @@ const CriarMarker = () => {
       const response = await result.json()
       console.log(response)
 
-      if (data?.success) {
+      if (response?.success) {
         navigation.goBack()
       } else {
         alert(data.error)
@@ -90,7 +91,7 @@ const CriarMarker = () => {
             onValueChange={() => handleCheckboxChange(category.id)}
             style={styles.checkbox}
           />
-          <Text>{category.name}</Text>
+          <Text>{category.nome}</Text>
         </View>
       ))}
 
