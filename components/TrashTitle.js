@@ -1,12 +1,13 @@
-import { View, Text, Image, StyleSheet } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
+import { Image } from "expo-image";
 
 const TrashTitle = ({ children, url1 }) => {
     console.log(url1);
     return (
         <View style={styles.imageView}>
             <Image
-                source={{ uri: url1 }}
-                resizeMode="contain"
+                source={url1}
+                contentFit="contain"
                 style={styles.image}
             />
             <Text style={styles.title}>{children}</Text>
@@ -28,9 +29,11 @@ const styles = StyleSheet.create({
     imageView: {
         width: '100%',
         maxHeight: 200,
+        minHeight: 200,
         marginBottom: 100
     },
     image: {
+        flex: 1,
         width: '100%',
         resizeMode: 'stretch',
         maxHeight: 200

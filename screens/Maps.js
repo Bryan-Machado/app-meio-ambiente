@@ -3,7 +3,8 @@ import MarkerCard from '../components/MarkerCard'
 import useMarkerStore from '../stores/markerStore';
 import useCategoriaStore from '../stores/categoriaStore'
 import Footer from '../components/Footer';
-import { useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
 
 const Maps = () => {
 
@@ -35,10 +36,10 @@ const Maps = () => {
     }
   }
 
-  useEffect(() => {
-    getMarkers(),
-    getCategorias()
-  }, [])
+  useFocusEffect(useCallback(() => {
+    getCategorias(),
+    getMarkers()
+  }, []))
 
   return (
     <View>

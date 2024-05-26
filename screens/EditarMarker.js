@@ -52,7 +52,6 @@ const EditarMarker = () => {
       console.log(data.marker);
       if (data?.success) {
         // update do marker na store com o data.marker
-        updateMarker(data.marker);
         navigation.goBack();
       } else {
         alert(data.error);
