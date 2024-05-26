@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground, FlatList, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, FlatList, ScrollView } from 'react-native';
 import MarkerCard from '../components/MarkerCard'
 import useMarkerStore from '../stores/markerStore';
 import useCategoriaStore from '../stores/categoriaStore'
@@ -38,13 +38,13 @@ const Maps = () => {
     }
   }
 
-  useFocusEffect(useCallback(() => {
-    getCategorias(),
-    getMarkers()
-  }, []))
+  // useFocusEffect(useCallback(() => {
+  //   getCategorias(),
+  //   getMarkers()
+  // }, []))
 
   return (
-    <View>
+    <ScrollView contentContainerStyle={styles.container}>
       <ImageBackground
         resizeMode="cover"
         source={require('../assets/images/bg-mobile.jpg')}
@@ -70,7 +70,7 @@ const Maps = () => {
           <Button title="Cadastrar novo marker" onPress={() => navigation.navigate('CadastrarMarker')} />
         </View>
       </ImageBackground>
-    </View>
+    </ScrollView>
 
   )
 }
@@ -94,6 +94,17 @@ const styles = StyleSheet.create({
   },
   flatListMarker: {
     alignSelf: 'center'
+  },
+  bg: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center'
   }
 }
 )
