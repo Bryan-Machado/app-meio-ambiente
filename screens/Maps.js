@@ -38,10 +38,10 @@ const Maps = () => {
     }
   }
 
-  // useFocusEffect(useCallback(() => {
-  //   getCategorias(),
-  //   getMarkers()
-  // }, []))
+  useFocusEffect(useCallback(() => {
+    getCategorias(),
+    getMarkers()
+  }, []))
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
